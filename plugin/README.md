@@ -8,7 +8,15 @@ This directory is the **canonical published plugin source**. The plugin lives he
 
 - **Node 22+** — required for the bundled `olam mcp serve` subprocess (the `.mcp.json` boots it via `npx -y @pleri/olam-cli mcp serve`).
 - **Docker** — Olam worlds run inside containers; the daemon must be reachable.
-- **gh CLI authenticated** — `gh auth status` should report a logged-in user with `read:packages` scope. Required for installing `@pleri/olam-cli` from GitHub Packages.
+- **gh CLI authenticated** — `gh auth status` should report a logged-in user with `read:packages` scope. Required for the `@pleri/olam-cli` npm package, which is published to GitHub Packages (not the public npmjs.org registry).
+- **`.npmrc` configured for the `@pleri` scope** — the `npx -y @pleri/olam-cli` boot path in `.mcp.json` resolves via the operator's `~/.npmrc`. The bundled installer (`curl -fsSL https://olam.bar.dev/install | sh`) writes this for you; if you bypass the installer, add the following lines to `~/.npmrc`:
+
+  ```ini
+  @pleri:registry=https://npm.pkg.github.com
+  //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+  ```
+
+  Without this, the MCP server fails to boot with a generic 404 from `npx`.
 
 ## Install paths
 
@@ -60,11 +68,17 @@ The plugin still tries `npx -y @pleri/olam-cli mcp serve` at runtime — to bypa
 The shipped `.mcp.json` uses `npx -y @pleri/olam-cli mcp serve` as the canonical form:
 
 - **Pro**: works without a globally-installed `olam` binary; fresh operators can use the plugin immediately after `claude plugin install`.
-- **Con**: every cold start does an `npx` resolution (~300ms-2s wall-clock depending on cache state).
+- **Con**: every cold start does an `npx` resolution (~300ms-2s wall-clock depending on cache state). Each resolution also re-fetches the latest published version of `@pleri/olam-cli` unless your npm cache is warm — there is no version pin in the shipped `.mcp.json` yet (tracked as a follow-up; once a stable 0.x line exists on the canonical registry, the canonical form should become `npx -y @pleri/olam-cli@^0.3 mcp serve`).
 
-The `olam mcp install` command (path #2 above) optimizes for operators who already have the CLI globally — it rewrites the MCP server entry to a direct `olam mcp serve` invocation, eliminating the `npx` step entirely.
+The `olam mcp install` command (path #2 above) optimizes for operators who already have the CLI globally — it rewrites the MCP server entry to a direct `olam mcp serve` invocation, eliminating the `npx` step entirely AND pinning the runtime to the installed version.
 
 Both modes share the same MCP tool surface; the slash commands work identically.
+
+### Supply-chain considerations
+
+The `@pleri/olam-cli` npm package is published to GitHub Packages, not npmjs.org. The `npx -y` form depends on your `~/.npmrc` mapping the `@pleri` scope to `https://npm.pkg.github.com` (see Prerequisites). Without that mapping, `npx` 404s against npmjs.org and the MCP server fails silently from the operator's perspective.
+
+If you encounter this failure mode, the diagnostic surface is `claude --debug` (look for `MCP server unavailable` or `npx exited non-zero`). Path #2 (`olam mcp install`) is the operator workaround — it bypasses `npx` entirely by writing a direct `olam mcp serve` command into the MCP server entry.
 
 ## Layout
 
