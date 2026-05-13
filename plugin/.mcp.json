@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "olam": {
+      "command": "npx",
+      "args": ["-y", "@pleri/olam-cli", "mcp", "serve"]
+    }
+  }
+}
