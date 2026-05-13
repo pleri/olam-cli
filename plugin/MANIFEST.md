@@ -1,0 +1,34 @@
+# Olam plugin — MANIFEST
+
+This file is the source-of-truth for the plugin's skill inventory, tier classification, and audit-script exempt list. The CI drift gate (`scripts/audit-skill-coverage.mjs`, landed in Phase E) reads this file to determine coverage.
+
+## Skill inventory
+
+| Skill | Tier | References (MCP tool / CLI command) | Notes |
+|---|---|---|---|
+| <!-- populated by Phase A.A5 (8 ported skills) + Phase C (5 thick MVP) + Phase D (thin batch, gated) --> | | | |
+
+## Tier definitions
+
+- **thick** — workflow-shaped; orchestrates multiple MCP tools / CLI commands; opinionated decision tree. Examples (Phase C): `/olam:bootstrap`, `/olam:pr-review-flow`, `/olam:troubleshoot`.
+- **thin** — one-per-significant-tool; reference + canonical example; gated on phase-b operator-stall evidence + phase-c routing-eval score.
+
+## Audit-script exempt list
+
+These MCP tools / CLI commands are deliberately NOT covered by a dedicated skill — they are infrastructure / installer surface, not operator-facing workflow.
+
+- `olam_auth_up` — internal credential bring-up
+- `olam_auth_complete` — internal OAuth callback handler
+- `olam_kg_install_hook` — internal hook installer
+- `olam_kg_uninstall_hook` — internal hook remover
+- `olam_control_plane` — internal control-plane plumbing
+
+(Additions require explicit rationale; the drift gate fails if uncovered tools are not on this list.)
+
+## Bypass mechanism
+
+Commit messages containing `[skip-skill-audit]` suppress the advisory comment AND auto-file a follow-up issue with a 30-day deadline (Phase E.E3). Use only for P0 emergency fixes; the auto-filed issue forces visibility.
+
+## Canonical source
+
+This plugin lives in `pleri/olam-cli` (NOT `pleri/olam`). Operators install via the shuk marketplace: `claude plugin marketplace add idl3/shuk && claude plugin install olam@shuk`. See `README.md` for the install matrix.
