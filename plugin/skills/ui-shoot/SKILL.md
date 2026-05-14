@@ -18,7 +18,7 @@ Take a deterministic set of screenshots of a web app from a YAML spec. Single so
 
 ## Why a brokered primitive
 
-Worlds (Cloudflare Sandbox containers) **never** run Playwright themselves — that would mean a 300 MB Chromium install per world plus a security blast-radius bigger than the world abstraction can defend. Instead, the supervisor owns one Chromium install and exposes the narrow `olam_capture_view` MCP tool. Hosts and worlds both call it; the supervisor renders. See `docs/architecture/04-authority-boundary.md` for the full reasoning.
+Worlds (Cloudflare Sandbox containers) **never** run Playwright themselves — that would mean a 300 MB Chromium install per world plus a security blast-radius bigger than the world abstraction can defend. Instead, the supervisor owns one Chromium install and exposes the narrow `olam_capture_view` MCP tool. Hosts and worlds both call it; the supervisor renders. See [`docs/architecture/04-authority-boundary.md`](https://github.com/pleri/olam/blob/main/docs/architecture/04-authority-boundary.md) for the full reasoning.
 
 ## Inputs
 
@@ -98,7 +98,7 @@ Full schema at `schemas/screenshots.schema.json`. JSON-Schema-aware editors (VS 
 - Visual regression / pixel diffing — separate skill, future work. This one captures; comparing is for `pixelmatch`/`odiff` downstream.
 - Video recording — see the `ui-demo` skill.
 - Discover-and-record (auto-derive a spec by exploring) — different skill, future.
-- Run Playwright inside worlds — explicitly forbidden; that would break the authority boundary documented in `docs/architecture/04-authority-boundary.md`.
+- Run Playwright inside worlds — explicitly forbidden; that would break the authority boundary documented in [`docs/architecture/04-authority-boundary.md`](https://github.com/pleri/olam/blob/main/docs/architecture/04-authority-boundary.md).
 
 ## Notes for in-world callers
 
