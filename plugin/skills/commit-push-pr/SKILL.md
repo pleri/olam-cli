@@ -224,7 +224,7 @@ olam dispatch <world-name> "<task>"
 
 ## See also
 
-- [`/atl:commit-push-pr`](https://github.com/atlas-builders/atlas-toolbox/blob/d287ea14ac390e212e88368e61c382fc10c74124/shared/engineering/skills/commit-push-pr/SKILL.md) — ADB-flavoured sibling (includes Linear `gitBranchName` autopull + atlas-specific ISOR hook). This skill is the olam-native equivalent.
+- `/atl:commit-push-pr` — ADB-flavoured upstream sibling (includes Linear `gitBranchName` autopull + org-specific Slack-post hook). This skill is the olam-native equivalent.
 - `/olam:plan` — author the spec before shipping.
 - `/olam:review` — review the diff before opening the PR.
 - `/olam:watch-pr` — keep the PR green after opening.

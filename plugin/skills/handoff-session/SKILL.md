@@ -206,7 +206,7 @@ If the session touched repos other than the CWD repo, handoff targets the **CWD 
 
 ## See also
 
-- [`/atl:handoff-session`](https://github.com/atlas-builders/atlas-toolbox/blob/d287ea14ac390e212e88368e61c382fc10c74124/shared/engineering/skills/handoff-session/SKILL.md) — ADB-flavoured sibling skill (includes adb workspace recreation steps). This skill is the olam-native equivalent.
+- `/atl:handoff-session` — ADB-flavoured upstream sibling (includes ADB-style workspace recreation steps). This skill is the olam-native equivalent.
 - `/olam:commit-push-pr` — for polished, ready-to-merge PRs.
 - `/olam:pickup-session` — planned receiver-side counterpart (TODO; not yet shipped).
 - `/olam:enter` — re-attach to a recreated world.

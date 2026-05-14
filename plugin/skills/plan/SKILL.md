@@ -198,10 +198,10 @@ Each microspec includes an **Epic Context Snapshot**: shared contracts, cross-fe
 - **Committing or opening a PR** — see `/olam:commit-push-pr`.
 - **Org-specific Rails conventions** — see `/olam:rails-standards` when it ships.
 - **Org-specific frontend conventions** — see `/olam:frontend-standards` when it ships.
-- **In-place ports of `/atl:plan`** — this is the olam-native sibling. The `/atl:plan` skill (from atlas-toolbox) is ADB-flavoured and remains the source-of-truth for that org's internal flavour.
+- **In-place ports of `/atl:plan`** — this is the olam-native sibling. The `/atl:plan` skill (upstream sibling) is ADB-flavoured and remains the source-of-truth for the originating org's internal flavour.
 
 ## See also
 
-- [`/atl:plan`](https://github.com/atlas-builders/atlas-toolbox/blob/d287ea14ac390e212e88368e61c382fc10c74124/shared/engineering/skills/plan/SKILL.md) — ADB-flavoured sibling skill; this skill is the olam-native equivalent.
+- `/atl:plan` — ADB-flavoured upstream sibling (operators with that plugin installed see both); this skill is the olam-native equivalent.
 - `/olam:commit-push-pr` — turn the implemented plan into a commit + PR.
 - `/olam:review` — review the implementation against the plan.

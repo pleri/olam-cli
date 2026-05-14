@@ -9,9 +9,16 @@
       "rationale": "Atlas is the internal/private fork; the public olam brand should not reference it. Case-insensitive to catch ATLAS KITCHEN / Atlas-kitchen variants."
     },
     {
-      "regex": "\\bAtlas\\b",
+      "regex": "\\batlas\\b",
+      "flags": "gi",
       "category": "internal-brand-bare",
-      "rationale": "Bare 'Atlas' (capitalized, word-boundary) outside cross-link prose. Catches the leak class surfaced in olam-atl-skill-parity Phase A CP3 (e.g. 'Org-specific PR-body rules (Atlas / Pleri / etc.)' in commit-push-pr/SKILL.md). Case-sensitive — the lowercase 'atlas' in 'atlas-toolbox' (legitimate cross-link path) and tooling names are NOT flagged. Anti-scope/See-also blocks referencing /atl:* siblings are allowlisted explicitly."
+      "rationale": "Bare 'atlas' (case-insensitive, word-boundary) — catches Atlas / ATLAS / atlas-toolbox / atlas-builders / atlas-specific / etc. in body content. The /atl:* skill identifiers (slash-prefix) are NOT word-boundary matches and remain unflagged. Self-referential scrub-tooling files + the audit doc that names this rule are allowlisted explicitly."
+    },
+    {
+      "regex": "\\bgrain\\b",
+      "flags": "gi",
+      "category": "internal-brand-bare",
+      "rationale": "Prophylactic bare-Grain rule (case-insensitive, word-boundary). Grain is one of the orgs onboarding to olam; the olam-cli plugin is the public-publish surface and should not name specific adopting orgs in body content."
     },
     {
       "regex": "atlas-kitchen",

@@ -193,7 +193,7 @@ Repeat until consensus. **Maximum 3 rounds** — prevents infinite loops.
 
 ## See also
 
-- [`/atl:review`](https://github.com/atlas-builders/atlas-toolbox/blob/d287ea14ac390e212e88368e61c382fc10c74124/shared/engineering/skills/review/SKILL.md) — ADB-flavoured sibling skill (atlas-specific standards refs).
+- `/atl:review` — ADB-flavoured upstream sibling (org-specific standards refs).
 - `/olam:plan` — pre-implementation specs.
 - `/olam:commit-push-pr` — turn the reviewed work into a PR.
 - `/olam:watch-pr` — keep the PR green after opening.
