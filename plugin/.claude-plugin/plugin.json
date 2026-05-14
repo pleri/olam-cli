@@ -1,0 +1,12 @@
+{
+  "name": "olam",
+  "version": "0.3.0",
+  "description": "Olam — agentic thinking platform. Spawn isolated development worlds, dispatch tasks to coding agents inside them, and capture the thought graphs they produce.",
+  "author": {
+    "name": "Ernie Sim"
+  },
+  "license": "MIT",
+  "keywords": ["olam", "worlds", "agentic", "thought-graphs", "mcp", "claude-code"],
+  "homepage": "https://github.com/pleri/olam",
+  "repository": "https://github.com/pleri/olam-cli.git"
+}

@@ -1,0 +1,75 @@
+{
+  "version": "0.2.0",
+  "description": "Patterns excluded from public publication of the olam plugin. Used by scripts/scrub-check.mjs. Entries support an optional 'flags' field (e.g. 'gi' for case-insensitive matching of brand variants).",
+  "patterns": [
+    {
+      "regex": "Atlas Kitchen",
+      "flags": "gi",
+      "category": "internal-brand",
+      "rationale": "Atlas is the internal/private fork; the public olam brand should not reference it. Case-insensitive to catch ATLAS KITCHEN / Atlas-kitchen variants."
+    },
+    {
+      "regex": "atlas-kitchen",
+      "flags": "gi",
+      "category": "internal-brand",
+      "rationale": "Kebab-case variant of the internal brand."
+    },
+    {
+      "regex": "atlas\\.kitchen",
+      "flags": "gi",
+      "category": "internal-domain",
+      "rationale": "Internal Slack/email/URL domain."
+    },
+    {
+      "regex": "atlaskitchen\\.com",
+      "flags": "gi",
+      "category": "internal-domain",
+      "rationale": "Alternative spelling of the internal domain."
+    },
+    {
+      "regex": "@atlaskitchen",
+      "flags": "gi",
+      "category": "internal-handle",
+      "rationale": "Slack/email handle alias for internal contacts."
+    },
+    {
+      "regex": "INTERNAL-[0-9]+",
+      "category": "internal-ticket-ref",
+      "rationale": "Linear ticket prefix used for not-for-public-disclosure issues."
+    },
+    {
+      "regex": "PLERI-INTERNAL-",
+      "flags": "gi",
+      "category": "internal-ticket-ref",
+      "rationale": "Pleri private ticket prefix."
+    },
+    {
+      "regex": "(?:aws|AWS|account[-_]id)[^\\n]{0,40}[0-9]{12}",
+      "category": "aws-account-id",
+      "rationale": "AWS account IDs are sensitive and should never appear in plugin docs."
+    },
+    {
+      "regex": "#(atlas|olam-internal|engineering-private)[a-z0-9_-]*",
+      "flags": "gi",
+      "category": "internal-slack-channel",
+      "rationale": "Private Slack channels should not be referenced in plugin docs (use public channels for support pointers)."
+    },
+    {
+      "regex": "\\bcorp\\.[a-z0-9]+\\.[a-z]{2,}",
+      "flags": "gi",
+      "category": "internal-corp-domain",
+      "rationale": "Generic 'corp.<company>.<tld>' subdomain pattern indicates an internal-only resource."
+    },
+    {
+      "regex": "\\b(?:i|vol|sg|subnet)-[0-9a-f]{8,17}\\b",
+      "category": "aws-resource-id",
+      "rationale": "EC2 instance / EBS volume / security group / subnet IDs (private infrastructure identifiers)."
+    },
+    {
+      "regex": "(ernest|ernie)@atlas\\.kitchen",
+      "flags": "gi",
+      "category": "internal-email",
+      "rationale": "Personal internal-domain email (use public contact paths in plugin docs instead)."
+    }
+  ]
+}
