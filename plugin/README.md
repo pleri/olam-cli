@@ -25,7 +25,7 @@ There are four supported install paths, ordered from most-to-least common.
 ### 1. shuk-marketplace (primary path)
 
 ```sh
-claude plugin marketplace add idl3/shuk
+claude plugin marketplace add pleri/shuk
 claude plugin install olam@shuk
 ```
 
