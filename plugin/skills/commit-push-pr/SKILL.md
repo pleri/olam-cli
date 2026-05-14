@@ -13,7 +13,7 @@ allowed-tools:
 
 # Commit & PR
 
-End-to-end "ship the work I just did" workflow: diff inspection → branch hygiene → conventional commit(s) → push → open PR with the repo's own template. Org-specific PR-body rules (Atlas / Pleri / etc.) come from project-local policies; this skill stays generic.
+End-to-end "ship the work I just did" workflow: diff inspection → branch hygiene → conventional commit(s) → push → open PR with the repo's own template. Org-specific PR-body conventions come from project-local policies; this skill stays generic.
 
 ## Workflow
 
@@ -216,15 +216,15 @@ olam dispatch <world-name> "<task>"
 
 ## Anti-scope (what this skill is NOT for)
 
-- **First-time committing without a plan** — see `olam-plan` to create the spec first.
+- **First-time committing without a plan** — see `/olam:plan` to create the spec first.
 - **Force-pushing or rewriting published history** — not automated; that's an explicit operator decision.
-- **Watching the PR after creation** — see `olam-watch-pr`.
-- **Reviewing the diff for correctness** — see `olam-review`.
+- **Watching the PR after creation** — see `/olam:watch-pr`.
+- **Reviewing the diff for correctness** — see `/olam:review`.
 - **Posting status to Slack / Discord / etc.** — out of scope; project-local policies own that.
 
 ## See also
 
-- [`/atl:commit-push-pr`](https://github.com/atlas-builders/atlas-toolbox/blob/main/shared/engineering/skills/commit-push-pr/SKILL.md) — ADB-flavoured sibling (includes Linear `gitBranchName` autopull + atlas-specific ISOR hook). This skill is the olam-native equivalent.
-- `olam-plan` — author the spec before shipping.
-- `olam-review` — review the diff before opening the PR.
-- `olam-watch-pr` — keep the PR green after opening.
+- [`/atl:commit-push-pr`](https://github.com/atlas-builders/atlas-toolbox/blob/d287ea14ac390e212e88368e61c382fc10c74124/shared/engineering/skills/commit-push-pr/SKILL.md) — ADB-flavoured sibling (includes Linear `gitBranchName` autopull + atlas-specific ISOR hook). This skill is the olam-native equivalent.
+- `/olam:plan` — author the spec before shipping.
+- `/olam:review` — review the diff before opening the PR.
+- `/olam:watch-pr` — keep the PR green after opening.

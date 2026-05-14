@@ -200,13 +200,13 @@ Final summary should include:
 ## Anti-scope (what this skill is NOT for)
 
 - **One-off PR status checks** — use `gh pr view <pr> --json state,statusCheckRollup` directly.
-- **Creating PRs** — see `olam-commit-push-pr`.
-- **Reviewing PR content** — see `olam-review`.
-- **Handing off mid-flight work** — see `olam-handoff-session`.
+- **Creating PRs** — see `/olam:commit-push-pr`.
+- **Reviewing PR content** — see `/olam:review`.
+- **Handing off mid-flight work** — see `/olam:handoff-session`.
 - **Watching multiple PRs concurrently** — invoke once per PR; one watcher process per PR.
 
 ## See also
 
-- [`/atl:watch-pr`](https://github.com/atlas-builders/atlas-toolbox/blob/main/shared/engineering/skills/watch-pr/SKILL.md) — ADB-flavoured sibling (identical core; both delegate to the same `gh_pr_watch.py` script).
-- `olam-commit-push-pr` — open the PR before watching it.
-- `olam-review` — manual review pass (alternative to watching for review-bot feedback).
+- [`/atl:watch-pr`](https://github.com/atlas-builders/atlas-toolbox/blob/d287ea14ac390e212e88368e61c382fc10c74124/shared/engineering/skills/watch-pr/SKILL.md) — ADB-flavoured sibling (identical core; both delegate to the same `gh_pr_watch.py` script).
+- `/olam:commit-push-pr` — open the PR before watching it.
+- `/olam:review` — manual review pass (alternative to watching for review-bot feedback).

@@ -20,6 +20,13 @@ This file is the source-of-truth for the plugin's skill inventory, tier classifi
 | `/olam:handoff-session` | thick | `Read`, `Bash`, `Glob` | WIP commit + gist + draft PR (port of /atl:handoff-session) |
 | `/olam:watch-pr` | thick | `Read`, `Edit`, `Bash`, `Grep`, `Glob` | Continuous PR watcher (port of /atl:watch-pr) |
 
+## Naming conventions
+
+- **Frontmatter `name:`** uses dashed form (`olam-plan`, `olam-commit-push-pr`) per the claude-code-plugin manifest spec.
+- **Prose references** inside SKILL.md bodies (Anti-scope, See-also, cross-links) use slash-colon form (`/olam:plan`, `/olam:commit-push-pr`) — matches the operator-facing invocation surface.
+
+The two forms are NOT interchangeable. The router resolves on the dashed `name:` field; humans read the slash-colon prose form. Don't mix them in the same artefact.
+
 ## Tier definitions
 
 - **thick** — workflow-shaped; orchestrates multiple MCP tools / CLI commands; opinionated decision tree. Examples (Phase C): `/olam:bootstrap`, `/olam:pr-review-flow`, `/olam:troubleshoot`.

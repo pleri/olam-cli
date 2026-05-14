@@ -65,16 +65,16 @@ Collect in parallel before spawning agents:
 
 ### Phase 2 — Spawn verification agents (parallel)
 
-Launch 5–6 specialised agents in a **single message**, each with the full context (plan summary + git diff). Use **sonnet** for deeper reasoning, **haiku** for mechanical / search tasks.
+Launch 5–6 specialised agents in a **single message**, each with the full context (plan summary + git diff). Two model tiers are used: a **reasoning model** for deeper analysis (logic / security / DB-perf) and a **mechanical model** for search / pattern / completeness tasks. The concrete model picks **MUST defer to the operator's project rules** (a project may pin all subagents to Opus; another may prefer Sonnet for the reasoning tier and Haiku for the mechanical tier). If the project has no preference, the reviewing agent picks reasonable defaults consistent with its own model.
 
-| Agent | Model | Focus | Key checks |
+| Agent | Tier | Focus | Key checks |
 |---|---|---|---|
-| Best Practices (reviewer) | haiku | Code quality | Conventions, readability, naming, complexity, callback patterns |
-| DB Performance (db-optimizer) | sonnet | Query efficiency | N+1, missing eager loading, missing indexes, complex queries |
-| Completeness (verifier) | haiku | Implementation gaps | Placeholders, incomplete error handling, edge cases, TODOs, missing tests |
-| Pattern Consistency (Explore) | haiku | Codebase alignment | Similar implementations elsewhere, deviations from existing patterns |
-| Logic & Correctness (reviewer) | sonnet | Bugs | Logic flow, conditional coverage, return values, state mutations, typos |
-| Security (qa-engineer) | sonnet | Safety | Input validation, authorisation, injection risks, mass assignment, race conditions |
+| Best Practices (reviewer) | mechanical | Code quality | Conventions, readability, naming, complexity, callback patterns |
+| DB Performance (db-optimizer) | reasoning | Query efficiency | N+1, missing eager loading, missing indexes, complex queries |
+| Completeness (verifier) | mechanical | Implementation gaps | Placeholders, incomplete error handling, edge cases, TODOs, missing tests |
+| Pattern Consistency (Explore) | mechanical | Codebase alignment | Similar implementations elsewhere, deviations from existing patterns |
+| Logic & Correctness (reviewer) | reasoning | Bugs | Logic flow, conditional coverage, return values, state mutations, typos |
+| Security (qa-engineer) | reasoning | Safety | Input validation, authorisation, injection risks, mass assignment, race conditions |
 
 Each agent MUST:
 
@@ -167,7 +167,7 @@ Repeat until consensus. **Maximum 3 rounds** — prevents infinite loops.
 ## Failure handling
 
 - **PR not found** — `gh pr view` returns 404. Surface the error and ask the user to confirm the PR number / URL.
-- **Merge conflicts on the PR branch** — note them in the verdict; do not attempt to auto-rebase from this skill (use `olam-watch-pr` or the user's PR-resolution flow).
+- **Merge conflicts on the PR branch** — note them in the verdict; do not attempt to auto-rebase from this skill (use `/olam:watch-pr` or the user's PR-resolution flow).
 - **CI red on the PR** — surface the failure summary (`gh pr checks <pr>`); flag as gating in the verdict.
 - **No diff to review** — tell the user (`git diff HEAD` empty AND no PR specified).
 - **Standards skills not yet shipped** — fall back to the general guideposts; note "applied general heuristics; project-local standards not yet available" in the output.
@@ -187,13 +187,13 @@ Repeat until consensus. **Maximum 3 rounds** — prevents infinite loops.
 
 - **Security-deep-dive** — when `/olam:security-review` ships, route there.
 - **Architectural review** — see `architect` agent for system-design discussions.
-- **First-time approach review** — see `olam-plan` to produce a spec before code exists.
-- **Watching a PR after review** — see `olam-watch-pr`.
-- **Committing or merging** — see `olam-commit-push-pr`.
+- **First-time approach review** — see `/olam:plan` to produce a spec before code exists.
+- **Watching a PR after review** — see `/olam:watch-pr`.
+- **Committing or merging** — see `/olam:commit-push-pr`.
 
 ## See also
 
-- [`/atl:review`](https://github.com/atlas-builders/atlas-toolbox/blob/main/shared/engineering/skills/review/SKILL.md) — ADB-flavoured sibling skill (atlas-specific standards refs).
-- `olam-plan` — pre-implementation specs.
-- `olam-commit-push-pr` — turn the reviewed work into a PR.
-- `olam-watch-pr` — keep the PR green after opening.
+- [`/atl:review`](https://github.com/atlas-builders/atlas-toolbox/blob/d287ea14ac390e212e88368e61c382fc10c74124/shared/engineering/skills/review/SKILL.md) — ADB-flavoured sibling skill (atlas-specific standards refs).
+- `/olam:plan` — pre-implementation specs.
+- `/olam:commit-push-pr` — turn the reviewed work into a PR.
+- `/olam:watch-pr` — keep the PR green after opening.

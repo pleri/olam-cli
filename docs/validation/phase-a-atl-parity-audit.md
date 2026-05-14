@@ -41,16 +41,18 @@ Compared via `git ls-tree -r <ref> plugin/skills/ | xargs -I{} git cat-file -p <
 - HEAD (this branch): 69930 bytes
 - **Delta: +42073 bytes (+41 KB)** — within the ≤+50 KB acceptance budget.
 
-### Audit-item coverage (from phase-a-tasks.md `## Audit item coverage`)
+### Audit-item coverage
 
-| Audit row | How addressed |
-|---|---|
-| **T2** Atlas-specificity misclassification | All 5 SKILL.md files scoped to generic stack patterns; Atlas-specific patterns (Solid Queue, Panko, archived_at, ADB workspace detection, atl:engineering-{backend,frontend} refs) deliberately omitted. Scrub-check exit 0. |
-| **T3** Operator confusion `/atl:` vs `/olam:` | Every skill carries an explicit Anti-scope bullet pointing at the `/atl:*` sibling, and a See-also link with the upstream URL. Operators discovering `/olam:plan` see "this is the olam-native sibling; for ADB-flavoured work use /atl:plan." |
-| **T4** 5 direct ports + `/atl:*` version drift | Copy-on-port (not import / not shared file). Each `/olam:*` skill is now independently versioned. The See-also link in each file makes the relationship discoverable, so future drift between siblings can be reviewed by inspecting both. |
-| **T6** Atlas-internal refs leak via SKILL.md | Scrub-check pre-merge on each skill (`plugin/skills/<name>/`) and on the full plugin tree. Zero unaddressed matches in any SKILL.md. |
-| **P1** Plugin install size | A6 measured delta = +41 KB ≤ +50 KB budget. |
-| **C1** Routing ambiguity `/atl:` vs `/olam:` | Anti-scope bullets in each skill + the See-also URL cross-link give Claude's router enough signal to disambiguate. (Adoption signal will land in Phase D.D1 routing-eval extension.) |
+Source-of-truth table lives in [`phase-a-tasks.md` § Audit item coverage](https://github.com/pleri/olam/blob/main/docs/plans/olam-atl-skill-parity/phase-a-tasks.md#audit-item-coverage). Phase A maps T2 / T3 / T4 / T6 / P1 / C1 to the A1–A6 mitigations enumerated there; this audit doc does NOT restate the table to avoid drift between the two artefacts.
+
+Mitigation evidence (one-liners against each row, since they ARE the verification trace):
+
+- **T2** scrub-check exit 0 on all 5 skills + full plugin tree (0 unaddressed via allowlist); `\bAtlas\b` denylist entry added in Phase A.A8 CP3 follow-up to catch the bare-Atlas leak class.
+- **T3** every skill carries Anti-scope + See-also cross-link to its `/atl:*` sibling (pinned to atlas-toolbox SHA `d287ea1`).
+- **T4** copy-on-port verified; pinned See-also SHAs surface upstream-rename as 404. Drift-audit script proposed as Phase B.B5 follow-up.
+- **T6** scrub-check verification (see T2).
+- **P1** install-size delta = +41 KB / +50 KB budget = 82%.
+- **C1** Anti-scope cross-links carry routing signal; adoption-side measurement lands in Phase D.D1 routing-eval extension.
 
 ### What was deliberately NOT done
 
@@ -59,6 +61,27 @@ Compared via `git ls-tree -r <ref> plugin/skills/ | xargs -I{} git cat-file -p <
 - **No project-policy hooks** — Phase A is intentionally policy-free (T2 mitigation). Policies arrive in Phase B (`.olam/policies/*.md applies_to:` schema).
 - **No `/olam:isor`-style chat-post-hook** — Atlas-specific, out of scope. The session-context appendix in `/olam:commit-push-pr` is portable; the ISOR post-step is not.
 - **No baseline-PNG regen for routing-eval** — that's a Phase D.D1 task.
+
+## CP3 adversarial audit (2026-05-14)
+
+Single-agent adversarial pass spawned per `/10x:pickup-execute-audit` CP3 contract (epic × clean-revert → Seams + Security + Simplicity lens set, B8). Outcome: **(b) Land with noted follow-ups** — 0 CRITICAL, 2 HIGH, 4 MEDIUM, 2 LOW.
+
+Findings closed in the **A8 follow-up commit** on this same branch (before #4 merges):
+
+| # | Lens | Severity | Finding | Fix landed |
+|---|---|---|---|---|
+| 1 | Seams | HIGH | Bare `Atlas` leak in commit-push-pr line 16 ("Atlas / Pleri" example outside Anti-scope) | Reworded prose; added `\bAtlas\b` to scrub-denylist with allowlist entries for the self-referential scrub-tooling files. Also reworded `plan/SKILL.md:205` (caught by the new rule). |
+| 2 | Security | HIGH | Prompt-injection-shaped ticket-URL risk in `/olam:plan` — fetched ticket content flows into Write/Edit unguarded | Added explicit Global Rules clause: ticket URLs are UNTRUSTED INPUT; quote-and-summarise only; refuse instructions about non-`.plans/` writes or tool invocations. |
+| 3 | Security | MEDIUM | `gh gist create` defaults to PUBLIC in handoff-session step 4 | Added `--secret` flag; added Failure-handling row for "public gist accidentally created → rotate + delete" path. |
+| 4 | Security | MEDIUM | `git add -A` in handoff-session captures `.env` / credentials with no pre-stage filter | Added mandatory pre-stage secret scan (`.env / .key / .pem / .p12 / credentials / secrets / .aws/ / .ssh/`); refuses to proceed if any match surfaces. |
+| 5 | Seams | MEDIUM | Naming-convention drift between `olam-foo` (dashed) and `/olam:foo` (slash-colon) in prose | Normalised all 25 prose refs across the 5 SKILL.md files to slash-colon form; added MANIFEST naming-conventions section codifying the rule. |
+| 6 | Seams | MEDIUM | Copy-on-port drift discovery has no mechanism beyond "See also link" | Pinned all 5 See-also URLs to atlas-toolbox commit SHA `d287ea14ac390e212e88368e61c382fc10c74124` (rename-detect via 404). Full drift-audit script proposed as Phase B.B5 follow-up (tracked at plan level). |
+| 7 | Simplicity | MEDIUM | `/olam:review` Deep mode hardcoded "sonnet" / "haiku" model picks conflict with operator project rules | Parameterised to `reasoning` / `mechanical` tiers; concrete model picks defer to operator project rules. |
+| 8 | Simplicity | LOW | `/olam:plan` 8-stack detection table over-promises (only 2 templates exist) | Pruned to "Backend / Frontend / Other" routing matching actual template surface. |
+| 9 | Simplicity | LOW | Audit-doc / tracker coverage-table dedup risk | Replaced doc's full table with cite-to-tracker + one-line mitigation evidence. Tracker remains source-of-truth. |
+
+Deferred to future phases (tracker rows):
+- Drift-detection automation (`npm run audit:atl-parity`) — **Phase B.B5 (proposed)**.
 
 ## Assumptions log
 

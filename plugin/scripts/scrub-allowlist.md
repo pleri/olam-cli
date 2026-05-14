@@ -42,3 +42,7 @@ until then, the self-references are allowlisted explicitly.
 ### PLERI-INTERNAL-
 - scripts/scrub-allowlist.md
 - scripts/scrub-denylist.json
+
+### \bAtlas\b
+- scripts/scrub-allowlist.md
+- scripts/scrub-denylist.json
