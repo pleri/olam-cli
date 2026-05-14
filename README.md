@@ -9,7 +9,7 @@ This is the *published artifact* repository. **Source lives in [`pleri/olam`](ht
 ### Claude Code operators — via shuk marketplace (recommended)
 
 ```sh
-claude plugin marketplace add idl3/shuk
+claude plugin marketplace add pleri/shuk
 claude plugin install olam@shuk
 ```
 

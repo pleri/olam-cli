@@ -31,4 +31,4 @@ Commit messages containing `[skip-skill-audit]` suppress the advisory comment AN
 
 ## Canonical source
 
-This plugin lives in `pleri/olam-cli` (NOT `pleri/olam`). Operators install via the shuk marketplace: `claude plugin marketplace add idl3/shuk && claude plugin install olam@shuk`. See `README.md` for the install matrix.
+This plugin lives in `pleri/olam-cli` (NOT `pleri/olam`). Operators install via the shuk marketplace: `claude plugin marketplace add pleri/shuk && claude plugin install olam@shuk`. See `README.md` for the install matrix.
