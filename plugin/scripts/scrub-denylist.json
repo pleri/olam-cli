@@ -9,6 +9,11 @@
       "rationale": "Atlas is the internal/private fork; the public olam brand should not reference it. Case-insensitive to catch ATLAS KITCHEN / Atlas-kitchen variants."
     },
     {
+      "regex": "\\bAtlas\\b",
+      "category": "internal-brand-bare",
+      "rationale": "Bare 'Atlas' (capitalized, word-boundary) outside cross-link prose. Catches the leak class surfaced in olam-atl-skill-parity Phase A CP3 (e.g. 'Org-specific PR-body rules (Atlas / Pleri / etc.)' in commit-push-pr/SKILL.md). Case-sensitive — the lowercase 'atlas' in 'atlas-toolbox' (legitimate cross-link path) and tooling names are NOT flagged. Anti-scope/See-also blocks referencing /atl:* siblings are allowlisted explicitly."
+    },
+    {
       "regex": "atlas-kitchen",
       "flags": "gi",
       "category": "internal-brand",

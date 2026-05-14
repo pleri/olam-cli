@@ -6,7 +6,26 @@ This file is the source-of-truth for the plugin's skill inventory, tier classifi
 
 | Skill | Tier | References (MCP tool / CLI command) | Notes |
 |---|---|---|---|
-| <!-- populated by Phase A.A5 (8 ported skills) + Phase C (5 thick MVP) + Phase D (thin batch, gated) --> | | | |
+| `/olam:connect` | thin | `mcp__olam__olam_connect` | Admin-hosted MCP wiring |
+| `/olam:create` | thin | `mcp__olam__olam_create`, `mcp__olam__olam_list` | New world (docker / cloudflare) |
+| `/olam:destroy` | thin | `mcp__olam__olam_destroy` | Tear down world |
+| `/olam:dispatch` | thin | `mcp__olam__olam_dispatch` | Task to running world |
+| `/olam:enter` | thin | `mcp__olam__olam_enter` | Interactive shell into world |
+| `/olam:list` | thin | `mcp__olam__olam_list` | List worlds |
+| `/olam:status` | thin | `mcp__olam__olam_status` | Inspect a single world |
+| `/olam:ui-shoot` | thin | `mcp__olam__olam_capture_view` | Screenshot helper |
+| `/olam:plan` | thick | `Read`, `Write`, `Edit`, `Glob`, `Grep`, `Bash` | Implementation spec author (port of /atl:plan) |
+| `/olam:commit-push-pr` | thick | `Read`, `Edit`, `Bash`, `Grep`, `Glob` | Diff → conventional commits → PR (port of /atl:commit-push-pr) |
+| `/olam:review` | thick | `Read`, `Bash`, `Grep`, `Glob`, `Task` | Standard + deep multi-agent review (port of /atl:review) |
+| `/olam:handoff-session` | thick | `Read`, `Bash`, `Glob` | WIP commit + gist + draft PR (port of /atl:handoff-session) |
+| `/olam:watch-pr` | thick | `Read`, `Edit`, `Bash`, `Grep`, `Glob` | Continuous PR watcher (port of /atl:watch-pr) |
+
+## Naming conventions
+
+- **Frontmatter `name:`** uses dashed form (`olam-plan`, `olam-commit-push-pr`) per the claude-code-plugin manifest spec.
+- **Prose references** inside SKILL.md bodies (Anti-scope, See-also, cross-links) use slash-colon form (`/olam:plan`, `/olam:commit-push-pr`) — matches the operator-facing invocation surface.
+
+The two forms are NOT interchangeable. The router resolves on the dashed `name:` field; humans read the slash-colon prose form. Don't mix them in the same artefact.
 
 ## Tier definitions
 
