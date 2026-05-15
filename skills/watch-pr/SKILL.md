@@ -207,6 +207,6 @@ Final summary should include:
 
 ## See also
 
-- [`/atl:watch-pr`](https://github.com/atlas-builders/atlas-toolbox/blob/d287ea14ac390e212e88368e61c382fc10c74124/shared/engineering/skills/watch-pr/SKILL.md) — ADB-flavoured sibling (identical core; both delegate to the same `gh_pr_watch.py` script).
+- `/atl:watch-pr` — ADB-flavoured upstream sibling (identical core; both delegate to the same `gh_pr_watch.py` script).
 - `/olam:commit-push-pr` — open the PR before watching it.
 - `/olam:review` — manual review pass (alternative to watching for review-bot feedback).

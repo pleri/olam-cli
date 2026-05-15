@@ -43,6 +43,9 @@ until then, the self-references are allowlisted explicitly.
 - scripts/scrub-allowlist.md
 - scripts/scrub-denylist.json
 
-### \bAtlas\b
+### \batlas\b
 - scripts/scrub-allowlist.md
+- scripts/scrub-denylist.json
+
+### \bgrain\b
 - scripts/scrub-denylist.json
