@@ -8,5 +8,7 @@
   "license": "MIT",
   "keywords": ["olam", "worlds", "agentic", "thought-graphs", "mcp", "claude-code"],
   "homepage": "https://github.com/pleri/olam",
-  "repository": "https://github.com/pleri/olam-cli.git"
+  "repository": "https://github.com/pleri/olam-cli.git",
+  "mcpServers": "./.mcp.json",
+  "skills": ["./skills/"]
 }
